@@ -1,6 +1,6 @@
 /*
  * Mini class project
- * Project name: Black Box
+ * Project name: The Black Box
  * 
  * rfid ID-20LA
  * arduino mega2560
@@ -8,7 +8,8 @@
 
 byte tagID[12];         //check the data and checksum for ID card
 boolean tagread=false;
-int manCount;           //count of the man
+int manCount;           //amount of the man
+int oldManCount;        //pervious amount of the man
 
 
 //ID card
@@ -72,29 +73,40 @@ void loop()
 
   if(tagread==true)                   //New tag is read
   {
-    if(manCount < 5)                  //the number of man in room
+    oldManCount = manCount;
+    compare_tag();                  //map tag ID with user name
+    Serial.print("manCount: ");
+    Serial.print(manCount);
+    Serial.print("\r\n");
+    clear_tag();                    //Clear the tag ID and ready for next tag
+    
+      
+    if(oldManCount == 4 && manCount == 5)                  //the number of man in room
     {
-      //manCount++;
-      compare_tag();                  //map tag ID with user name
-      Serial.print("manCount: ");
-      Serial.print(manCount);
+      //oldManCount = manCount;
+      //compare_tag();                  //map tag ID with user name
+      Serial.print("Servo: ON ");
+      //Serial.print("manCount: ");
+      //Serial.print(manCount);
       Serial.print("\r\n");
       //print_tag();                    //Display the tag ID
-      clear_tag();                    //Clear the tag ID and ready for next tag
+      //clear_tag();                    //Clear the tag ID and ready for next tag
       tagread=false;
     }
     
-    if(manCount >= 5)                 //the number of man in room
+    if(oldManCount == 5 && manCount == 4)                 //the number of man in room
     {
-      compare_tag();                  //map tag ID with user name
-      //manCount++;
-      Serial.print("manCount: ");
-      Serial.print(manCount);
+      //oldManCount = manCount;
+      //compare_tag();                  //map tag ID with user name
+      Serial.print("Servo: OFF ");
+      //Serial.print("manCount: ");
+      //Serial.print(manCount);
       Serial.print("\r\n");
       //print_tag();                    //Display the tag ID
-      clear_tag();                    //Clear the tag ID and ready for next tag
+      //clear_tag();                    //Clear the tag ID and ready for next tag
       tagread=false; 
     }
+    tagread=false;
   }
   delay(10);
 }
@@ -134,7 +146,7 @@ void compare_tag()
   int card_011_temp = 0;
 
   
-  for(int index = 0; index < 10; index++)
+  for(int index = 0; index < 10; index++)                 //check 10 byte of data 
   {
     if(tagID[index] == card_001[index])card_001_temp++;            
     if(tagID[index] == card_002[index])card_002_temp++;           
