@@ -8,8 +8,8 @@
 
 byte tagID[12];         //check the data and checksum for ID card
 boolean tagread=false;
-int manCount;           //amount of the man
-int oldManCount;        //pervious amount of the man
+int manCount;           //the numbers of the man in system
+int oldManCount;        //pervious numbers of the man in system
 
 
 //ID card
@@ -41,7 +41,7 @@ void setup()
 {
   Serial.begin(9600);   //send data to computer
   Serial2.begin(9600);  //receive data from rfid reader
-  Serial3.begin(9600);  //send data to nodemcu
+  Serial3.begin(9600);  //send data to ESP8266
 }
 
 void loop()
@@ -74,18 +74,18 @@ void loop()
   if(tagread==true)                   //New tag is read
   {
     oldManCount = manCount;
-    compare_tag();                  //map tag ID with user name
+    compare_tag();                    //map tag ID with user name
     Serial.print("manCount: ");
     Serial.print(manCount);
     Serial.print("\r\n");
-    clear_tag();                    //Clear the tag ID and ready for next tag
+    clear_tag();                      //Clear the tag ID and ready for next tag
     
       
-    if(oldManCount == 4 && manCount == 5)                  //the number of man in room
+    if(oldManCount == 4 && manCount == 5)                  //the numbers of man in system change from 4 to 5 
     {
       //oldManCount = manCount;
       //compare_tag();                  //map tag ID with user name
-      Serial.print("Servo: ON ");
+      Serial.print("Servo: ON ");                         //Servo "ON"
       //Serial.print("manCount: ");
       //Serial.print(manCount);
       Serial.print("\r\n");
@@ -94,12 +94,12 @@ void loop()
       tagread=false;
     }
     
-    if(oldManCount == 5 && manCount == 4)                 //the number of man in room
+    if(oldManCount == 5 && manCount == 4)                 //the number of man in system change from 5 to 4
     {
       //oldManCount = manCount;
       //compare_tag();                  //map tag ID with user name
-      Serial.print("Servo: OFF ");
-      //Serial.print("manCount: ");
+      Serial.print("Servo: OFF ");                        //Servo "OFF"
+      //Serial.print("manCount: ");               
       //Serial.print(manCount);
       Serial.print("\r\n");
       //print_tag();                    //Display the tag ID
@@ -160,8 +160,9 @@ void compare_tag()
     if(tagID[index] == card_010[index])card_010_temp++;           
     if(tagID[index] == card_011[index])card_011_temp++;           
   }
-    if(card_001_temp == 10)                              // ID chad FIBO_001
+    if(card_001_temp == 10)                              // ID card FIBO_001
     {
+      Serial3.print('A');                                //Send 'A' to ESP8266
       if(card_001_state == 0)
       {
       manCount++;
@@ -176,8 +177,9 @@ void compare_tag()
       }
     } 
     
-    if(card_002_temp == 10)                              // ID chad FIBO_002
+    if(card_002_temp == 10)                              // ID card FIBO_002
     {
+      Serial3.print('B');                                //Send 'B' to ESP8266
       if(card_002_state == 0)
       {
       manCount++;
@@ -192,8 +194,9 @@ void compare_tag()
       }
     }
     
-    if(card_003_temp == 10)                              // ID chad FIBO_003
+    if(card_003_temp == 10)                              // ID card FIBO_003
     {
+      Serial3.print('C');                                //Send 'C' to ESP8266
       if(card_003_state == 0)
       {
       manCount++;
@@ -208,8 +211,9 @@ void compare_tag()
       }
     }
 
-    if(card_004_temp == 10)                              // ID chad FIBO_004
+    if(card_004_temp == 10)                              // ID card FIBO_004
     {
+      Serial3.print('D');                                //Send 'D' to ESP8266
       if(card_004_state == 0)
       {
       manCount++;
@@ -224,8 +228,9 @@ void compare_tag()
       }
     }
     
-    if(card_005_temp == 10)                              // ID chad FIBO_005
+    if(card_005_temp == 10)                              // ID card FIBO_005
     {
+      Serial3.print('E');                                //Send 'E' to ESP8266
       if(card_005_state == 0)
       {
       manCount++;
@@ -240,8 +245,9 @@ void compare_tag()
       }
     }
 
-    if(card_006_temp == 10)                              // ID chad FIBO_006
+    if(card_006_temp == 10)                              // ID card FIBO_006
     {
+      Serial3.print('L');                                //Send 'L' to ESP8266 (**send 'F' does not work)
       if(card_006_state == 0)
       {
       manCount++;
@@ -256,8 +262,9 @@ void compare_tag()
       }
     }
     
-    if(card_007_temp == 10)                              // ID chad FIBO_007
+    if(card_007_temp == 10)                              // ID card FIBO_007
     {
+      Serial3.print('G');                                //Send 'G' to ESP8266
       if(card_007_state == 0)
       {
       manCount++;
@@ -272,8 +279,9 @@ void compare_tag()
       }
     }
 
-    if(card_008_temp == 10)                              // ID chad FIBO_008
+    if(card_008_temp == 10)                              // ID card FIBO_008
     {
+      Serial3.print('H');                                //Send 'H' to ESP8266
       if(card_008_state == 0)
       {
       manCount++;
@@ -288,8 +296,9 @@ void compare_tag()
       }
     }
     
-    if(card_009_temp == 10)                              // ID chad FIBO_009
+    if(card_009_temp == 10)                              // ID card FIBO_009
     {
+      Serial3.print('I');                                //Send 'I' to ESP8266
       if(card_009_state == 0)
       {
       manCount++;
@@ -304,8 +313,9 @@ void compare_tag()
       }
     }
 
-    if(card_010_temp == 10)                               // ID chad FIBO_010
+    if(card_010_temp == 10)                               // ID card FIBO_010
     {
+      Serial3.print('J');                                //Send 'J' to ESP8266
       if(card_010_state == 0)
       {
       manCount++;
@@ -325,6 +335,8 @@ void compare_tag()
     if(card_001_temp != 10 && card_002_temp != 10 && card_003_temp != 10 && card_004_temp != 10 && card_005_temp != 10
     && card_006_temp != 10 && card_007_temp != 10 && card_008_temp != 10 && card_009_temp != 10 && card_010_temp != 10 && card_011_temp != 10)
     {
-      Serial.print("Name: Unknow Subscriber\r\n"); 
+      Serial.print("Name: Unknown Subscriber\r\n");
+      Serial3.print('K');                                //Send 'K' to ESP8266
     }
 }
+
