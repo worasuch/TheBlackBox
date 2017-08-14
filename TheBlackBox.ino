@@ -160,7 +160,7 @@ void compare_tag()
     if(tagID[index] == card_010[index])card_010_temp++;           
     if(tagID[index] == card_011[index])card_011_temp++;           
   }
-    if(card_001_temp == 10)                              // ID chad FIBO_001
+    if(card_001_temp == 10)                              // ID card FIBO_001
     {
       Serial3.print('A');                                //Send 'A' to ESP8266
       if(card_001_state == 0)
@@ -177,7 +177,7 @@ void compare_tag()
       }
     } 
     
-    if(card_002_temp == 10)                              // ID chad FIBO_002
+    if(card_002_temp == 10)                              // ID card FIBO_002
     {
       Serial3.print('B');                                //Send 'B' to ESP8266
       if(card_002_state == 0)
@@ -194,7 +194,7 @@ void compare_tag()
       }
     }
     
-    if(card_003_temp == 10)                              // ID chad FIBO_003
+    if(card_003_temp == 10)                              // ID card FIBO_003
     {
       Serial3.print('C');                                //Send 'C' to ESP8266
       if(card_003_state == 0)
@@ -211,7 +211,7 @@ void compare_tag()
       }
     }
 
-    if(card_004_temp == 10)                              // ID chad FIBO_004
+    if(card_004_temp == 10)                              // ID card FIBO_004
     {
       Serial3.print('D');                                //Send 'D' to ESP8266
       if(card_004_state == 0)
@@ -228,7 +228,7 @@ void compare_tag()
       }
     }
     
-    if(card_005_temp == 10)                              // ID chad FIBO_005
+    if(card_005_temp == 10)                              // ID card FIBO_005
     {
       Serial3.print('E');                                //Send 'E' to ESP8266
       if(card_005_state == 0)
@@ -245,7 +245,7 @@ void compare_tag()
       }
     }
 
-    if(card_006_temp == 10)                              // ID chad FIBO_006
+    if(card_006_temp == 10)                              // ID card FIBO_006
     {
       Serial3.print('L');                                //Send 'L' to ESP8266 (**send 'F' does not work)
       if(card_006_state == 0)
@@ -262,7 +262,7 @@ void compare_tag()
       }
     }
     
-    if(card_007_temp == 10)                              // ID chad FIBO_007
+    if(card_007_temp == 10)                              // ID card FIBO_007
     {
       Serial3.print('G');                                //Send 'G' to ESP8266
       if(card_007_state == 0)
@@ -279,7 +279,7 @@ void compare_tag()
       }
     }
 
-    if(card_008_temp == 10)                              // ID chad FIBO_008
+    if(card_008_temp == 10)                              // ID card FIBO_008
     {
       Serial3.print('H');                                //Send 'H' to ESP8266
       if(card_008_state == 0)
@@ -296,7 +296,7 @@ void compare_tag()
       }
     }
     
-    if(card_009_temp == 10)                              // ID chad FIBO_009
+    if(card_009_temp == 10)                              // ID card FIBO_009
     {
       Serial3.print('I');                                //Send 'I' to ESP8266
       if(card_009_state == 0)
@@ -313,7 +313,7 @@ void compare_tag()
       }
     }
 
-    if(card_010_temp == 10)                               // ID chad FIBO_010
+    if(card_010_temp == 10)                               // ID card FIBO_010
     {
       Serial3.print('J');                                //Send 'J' to ESP8266
       if(card_010_state == 0)
